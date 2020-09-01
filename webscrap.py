@@ -25,11 +25,16 @@ print(soup.results)
 
 with open(filename, 'w') as csv_file:
   csv_writer = writer(csv_file)
-  headers = ['Title', 'Location']
+  headers = ['Title', 'Location', 'Company']
   csv_writer.writerow(headers)
 
   for job_elem in results:
+
     title = job_elem.find('span', class_='screen-reader-text').get_text()
+
     location = job_elem.find('span', class_='job-result-card__location').get_text()
 
-    csv_writer.writerow([title, location])
+    company = job_elem.find('h4', class_='result-card__subtitle').get_text()
+
+
+    csv_writer.writerow([title, location, company])
